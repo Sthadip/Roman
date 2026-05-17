@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('deposit_settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('coin', 10)->default('BTC');
+            $table->string('account_name');
+            $table->string('account_number');
+            $table->string('bank_name')->nullable();
+            $table->string('network')->nullable();
+            $table->string('wallet_address')->nullable();
+            $table->text('instructions')->nullable();
+            $table->string('qr_image_path')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('deposit_settings');
+    }
+};
